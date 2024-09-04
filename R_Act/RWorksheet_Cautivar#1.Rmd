@@ -10,32 +10,35 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-"Number 1"
-
 "Write the R code and its output."
 age = c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42, 53, 41, 51, 35, 24, 33, 41)
 
 "How many data points?"
   length(age)
-
+```
+```{r}
   "2. Find the reciprocal of the values for age."
 reciprocal <- 1/age
 library(MASS)
 fractions(reciprocal)
-
+```
+```{r}
 "Assign also new_age <- c(age, 0, age)."
 new_age <- c(age, 0, age)
 new_age
 "What happen to the new_age?"
 "the value of age, 0, and age was assigned to the variable new_age."
-
+```
+```{r}
 "Sort the values for age."
 sort(age)
-
+```
+```{r}
 "Find the minimum and maximum value for age."
 min(age)
 max(age)
-
+```
+```{r}
 "Set up a vector named data, consisting of 2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5,
 2.3, 2.5, 2.3, 2.4, and 2.7."
 
@@ -44,28 +47,32 @@ length(data)
 
 "Write the R code and its output."
 data <- c(2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5, 2.3, 2.5, 2.3, 2.4, 2.7)
-
+```
+```{r}
 "Generates a new vector for data where you double every value of the data."
 doubled_data <- 2*data
 doubled_data
 
 "What happen to the data?"
 "The elements of the variable data was doubled"
-
-
+```
+```{r}
 "8.1 Integers from 1 to 100."
 dp1 <- seq(1:100)
-
+```
+```{r}
 "8.2 Numbers from 20 to 60"
 dp2 <- seq(20:60)
-
-
+```
+```{r}
 "*8.3 Mean of numbers from 20 to 60"
 dp3 <- mean(20:60)
-
+```
+```{r}
 "*8.4 Sum of numbers from 51 to 91"
 dp4 <- sum(51:91)
-
+```
+```{r}
 "*8.5 Integers from 1 to 1,000"
 seq(1:1000)
 
@@ -74,19 +81,23 @@ seq(1:1000)
 sum(length(dp1) + length(dp2) + length(dp3) + length(dp4))
 
 "For 8.5 find only maximum data points until 10."
-
-
+seq_1_to_1000 <- 1:1000
+max_to_10 <- max(seq_1_to_1000[seq_1_to_1000 <- 10])
+print(max_to_10)
+```
+```{r}
 "*Print a vector with the integers between 1 and 100 that are not divisible by 3, 5 and
 7 using filter option."
 
 Filter(function(i) { all(i %% c(3,5,7) != 0) }, seq(100))
-
-
+```
+```{r}
 "Generate a sequence backwards of the integers from 1 to 100."
 
 backwards <- c(100:1)
 backwards
-
+```
+```{r}
 "List all the natural numbers below 25 that are multiples of 3 or 5."
 naturalNumbers <- c(24:1)
 someNaturalnumbers <- Filter(function(i) { all(i %% c(3) == 0) | all(i %% c(5) == 0) }, naturalNumbers)
@@ -96,7 +107,8 @@ dpSum <- sum(someNaturalnumbers)
 
 "How many data points from 10 to 11?"
 sum(length(backwards) + length(dpSum))
-
+```
+```{r}
 "Statements can be grouped together using braces ‘{’ and ‘}’. A group of statements
 is sometimes called a block. Single statements are evaluated when a new line is typed
 at the end of the syntactically complete statement. Blocks are not evaluated until a
@@ -106,11 +118,40 @@ new line is entered after the closing brace."
 
 "Describe the output."
 "An error occured because the x variable has no value and it was used to sum 0 and 5 but there were no values assigned to it."
-
-
+```
+```{r}
 "*Set up a vector named score, consisting of 72, 86, 92, 63, 88, 89, 91, 92, 75,
 75 and 77. To access individual elements of an atomic vector, one generally uses the
 x[i] construction."
 score <- c(72, 86, 92, 63, 88, 89, 91, 92, 75, 75, 77)
+
+score[2]
+score[3]
+```
+```{r}
+"*Create a vector a = c(1,2,NA,4,NA,6,7)."
+
+"a. Change the NA to 999 using the codes print(a,na.print= -999)."
+
+"b. Write the R code and its output. Describe the output."
+a = c(1,2,NA,4,NA,6,7)
+
+print(a,na.print="-999")
+
+"The original vector contains the elements NA, but after changing their values using the given code, all NA's changed into -999"
+```
+```{r}
+"A special type of function calls can appear on the left hand side of the assignment
+operator as in > class(x) <- foo"
+
+name = readline(prompt="Input your name: ")
+age = readline(prompt="Input your age: ")
+print(paste("My name is",name, "and I am",age ,"years old."))
+print(R.version.string)
+
+"What is the output of the above code?"
+"The code prompts a message to the user to input their name and age and prints it together using the format."
+""
+```
 ```
 
