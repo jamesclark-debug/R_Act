@@ -106,7 +106,7 @@ someNaturalnumbers <- Filter(function(i) { all(i %% c(3) == 0) | all(i %% c(5) =
 dpSum <- sum(someNaturalnumbers)
 
 "How many data points from 10 to 11?"
-sum(length(backwards) + length(dpSum))
+sum(length(backwards) + length(dpSum) + length(someNaturalnumbers) + length(naturalNumbers))
 ```
 ```{r}
 "Statements can be grouped together using braces ‘{’ and ‘}’. A group of statements
