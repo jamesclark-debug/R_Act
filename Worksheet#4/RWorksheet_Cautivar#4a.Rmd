@@ -1,0 +1,81 @@
+---
+title: "RWorksheet_Cautivar#4a.Rmd"
+author: "James Clark Cautivar"
+date: "2024-10-16"
+output: pdf_document
+---
+
+1. The table below shows the data about shoe size and height. Create a data frame.
+```{r}
+RespondentsData <- data.frame(
+  Shoe_Size = c(6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5, 10.5, 8.5, 12.0, 10.5, 13.0, 11.5, 8.5, 5.0, 10.0, 6.5, 7.5, 8.5, 10.5, 8.5, 10.5, 11.0, 9.0, 13.0),
+  Height = c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0,70.0, 71.0, 72.0, 64.0, 74.5, 67.0, 71.0, 71.0, 77.0, 72.0, 59.0, 62.0, 72.0, 66.0, 64.0 , 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0),
+  Gender = c("F", "F", "F", "F", "M", "F", "F", "F", "M", "F", "M", "F", "M", "M", "M", "M", "F", "F", "M", "F", "F", "M", "M", "F", "M", "M", "M", "M")
+)
+RespondentsData
+```
+a. Describe the data.
+The data shows informations about respondent's shoe size, height, and their gender.
+
+b. Create a subset by males and females with their corresponding shoe size and height. What its result? Show the R scripts.
+```{r}
+Males <- subset(RespondentsData, Gender == "M", select = c(Gender, Shoe_Size, Height))
+Males
+
+Females <- subset(RespondentsData, Gender == "F", select = c(Gender, Shoe_Size, Height))
+Females
+```
+
+c. Find the mean of shoe size and height of the respondents. Write the R scripts and its
+result.
+```{r}
+AllShoeSize <- RespondentsData$Shoe_Size
+mean(AllShoeSize)
+
+AllHeight <- RespondentsData$Height
+mean(AllHeight)
+```
+
+d. Is there a relationship between shoe size and height? Why?
+I would say that there is a relationship between shoe size and height. Because taller people tend to have bigger shoe size while shorter people have smaller shoe size.
+
+2. Construct character vector months to a factor with factor() and assign the result to factor_months_vector. Print out factor_months_vector and assert that R prints out the factor levels below the actual values.
+```{r}
+months_vector <- c("March","April","January","November","January", "September","October","September","November","August", "January","November","November","February","May","August", "July","December","August","August","September","November","February",
+"April")
+
+factor_months_vector <- factor(months_vector)
+factor_months_vector
+```
+
+3. Then check the summary() of the months_vector and factor_months_vector. Interpret the results of both vectors. Are they both equally useful in this case?
+```{r}
+summary(months_vector)
+summary(factor_months_vector)
+```
+Personally, i think that they're both useful because they show different results which are helpful if you need a specific information about a vector.
+
+4. Create a vector and factor for the table below.
+```{r}
+Directions <- c("East", "West", "North")
+Frequency <- c(1, 4, 3)
+
+new_order_data <- factor(Directions,levels = c("East","West","North"))
+print(new_order_data)
+```
+
+5. Enter the data below in Excel with file name = import_march.csv
+a. Import the excel file into the Environment Pane using read.table() function. Write the code.
+```{r}
+file <- read.table("import_march.csv", header = TRUE, sep = ",")
+```
+b. View the dataset. Write the R scripts and its result.
+```{r}
+print(file)
+```
+
+
+
+
+
+
