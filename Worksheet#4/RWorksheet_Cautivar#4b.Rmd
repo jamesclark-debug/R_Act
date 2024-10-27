@@ -1,0 +1,97 @@
+---
+title: "RWorksheet_Cautivar#4b.Rmd"
+author: "James Clark Cautivar"
+date: "2024-10-27"
+output: pdf_document
+---
+1. Using the for loop, create an R script that will display a 5x5 matrix as shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
+```{r}
+vectorA <- c(1, 2, 3, 4, 5)
+
+mat <- matrix(nrow = 5, ncol = 5)
+
+for (i in 1:5) {
+  for (j in 1:5) {
+    mat[i, j] <- vectorA[abs(i - j) + 1]
+  }
+}
+
+for (i in 1:5) {
+  for (j in 1:5) {
+    cat(mat[i, j], " ")
+  }
+  cat("\n")  
+}
+
+cat("\n")  
+
+matrixz <- matrix(0, nrow = 5, ncol = 5)
+
+
+for (i in 1:5) {
+  for (j in 1:5) {
+    cat(matrixz[i, j], " ")
+  }
+  cat("\n")  
+}
+```
+2. Print the string "*" using for() function. The output should be the same as shown in Figure
+```{r}
+for (i in 1:5) {
+  for (j in 1:i) {
+    cat("*", " ")
+  }
+  cat("\n")  
+}
+```
+3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
+```{r}
+inp <- as.integer(readline(prompt = "Input a number: "))
+inp <- 0 #example value of input because i cant knit it if it has a value of NA
+
+a <- 0
+b <- 1
+term <- 1
+
+repeat {
+  
+  if (a >= inp) {
+    cat(a, " ")  
+  }
+  
+  
+  fib <- a + b
+  a <- b
+  b <- fib
+  term <- term + 1
+  
+  if (a > 500) {
+    break
+  }
+}
+cat("\n")  
+
+```
+4. Import the dataset as shown in Figure 1 you have created previously.
+a. What is the R script for importing an excel or a csv file? Display the first 6 rows of the dataset? Show your codes and its result
+```{r}
+file <- read.table("RespondentsData.csv", header = TRUE, sep = ",")
+file
+
+head(file)
+```
+b. Create a subset for gender(female and male). How many observations are there in Male? How about in Female? Write the R scripts and its output.
+```{r}
+females <- subset(file, Gender == "F")
+males <- subset(file, Gender == "M")
+females 
+males
+
+#Number of Observations
+femalesObs <- nrow(females)
+malesObs <- nrow(males)
+femalesObs
+malesObs
+```
+
+
