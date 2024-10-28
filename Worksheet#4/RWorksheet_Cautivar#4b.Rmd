@@ -93,5 +93,37 @@ malesObs <- nrow(males)
 femalesObs
 malesObs
 ```
+c. Create a graph for the number of males and females for Household Data. Use plot(), chart type = barplot. Make sure to place title, legends, and colors. Write the R scripts and its result.
+```{r}
+load("householdData.RData")
+
+#i searched and used this function because the orginal householdData dataframe has extra spaces and it created an extra bar for male category. 
+householdData[["Sex"]] <- gsub(" ", "", householdData[["Sex"]])
+
+#i also searched the table function to easily count the frequency of each gender. This is where i encountered the duplicate bar for male category when i first created the bar plot. It happened because there are extra spaces on my householdData dataframe where some looked like this " male".
+genderCounts <- table(householdData$Sex)
+barplot(
+  genderCounts,
+  col = c("pink", "blue"),
+  main = "Number of Males and Females in Household",
+  xlab = "Gender",
+  ylab = "Count"
+)
+```
+5. The monthly income of Dela Cruz family was spent on the following:
+a. Create a piechart that will include labels in percentage.Add some colors and title of the chart. Write the R scripts and show its output.
+```{r}
+amounts <- c(60, 10, 5, 25)
+categories <- c("Food", "Electricity", "Savings", "Miscellaneous")
+labels <- paste(categories, amounts, "%")
+
+pie(
+  amounts,
+  labels = labels,
+  col = c("yellow", "green", "pink", "orange"),
+  main = "Expenses of Dela Cruz Family"
+)
+```
+
 
 
