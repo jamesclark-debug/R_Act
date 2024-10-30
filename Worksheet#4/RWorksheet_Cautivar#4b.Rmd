@@ -51,7 +51,6 @@ inp <- 0 #example value of input because i cant knit it if it has a value of NA
 
 a <- 0
 b <- 1
-term <- 1
 
 repeat {
   
@@ -63,7 +62,6 @@ repeat {
   fib <- a + b
   a <- b
   b <- fib
-  term <- term + 1
   
   if (a > 500) {
     break
@@ -124,6 +122,108 @@ pie(
   main = "Expenses of Dela Cruz Family"
 )
 ```
+6. Use the iris dataset.
+a. Check for the structure of the dataset using the str() function. Describe what you have seen in the output.
+```{r}
+data(iris)
+str(iris)
+```
+The iris data is a dataframe and based on the str function, it has 150 observations/rows and 5 variables/columns. The variables are Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, and Species.
+
+b. Create an R object that will contain the mean of the sepal.length,
+sepal.width,petal.length,and petal.width. What is the R script and its result?
+```{r}
+means <- c(
+  Sepal.Length = mean(iris$Sepal.Length),
+  Sepal.Width = mean(iris$Sepal.Width),
+  Petal.Length = mean(iris$Petal.Length),
+  Petal.Width = mean(iris$Petal.Width)
+)
+means
+```
+c. Create a pie chart for the Species distribution. Add title, legends, and colors. Write the R script and its result.
+```{r}
+species <- table(iris$Species)
+colors <- c("blue", "green", "pink")
+
+pie(
+  species,
+  main = "Species Distribution",
+  col = colors,
+  labels = paste(names(species), "\n", species),
+)
+
+legend(
+  "bottomleft",
+  legend = names(species),
+  fill = colors,
+  title = "Species"
+)
+```
+d. Subset the species into setosa, versicolor, and virginica. Write the R scripts and show the last six (6) rows of each species.
+```{r}
+setosa <- subset(iris, Species == "setosa")
+versicolor <- subset(iris, Species == "versicolor")
+virginica <- subset(iris, Species == "virginica")
+
+tail(setosa)
+tail(versicolor)
+tail(virginica)
+```
+e. Create a scatterplot of the sepal.length and sepal.width using the different species(setosa,versicolor,virginica). Add a title = “Iris Dataset”, subtitle = “Sepal width and length, labels for the x and y axis, the pch symbol and colors should be based on the species.
+```{r}
+iris$Species <- as.factor(iris$Species)
+
+colors <- c("setosa" = "blue", "versicolor" = "green", "virginica" = "pink")
+symbols <- c("setosa" = 16, "versicolor" = 17, "virginica" = 18)
+
+plot(
+  iris$Sepal.Length, iris$Sepal.Width,
+  col = colors[iris$Species],
+  pch = symbols[iris$Species],
+  main = "Iris Dataset",
+  sub = "Sepal width and length",
+  xlab = "Sepal Length",
+  ylab = "Sepal Width"
+)
+
+legend(
+  "topleft",
+  legend = levels(iris$Species),
+  col = colors,
+  pch = symbols,
+  title = "Species"
+)
+```
+f. Interpret the result.
+The scatterplot shows the relationship between Sepal Length and Sepal Width for the three species. Setosa has the widest sepal but also has the shortest sepal length among the species. Versicolor on the other hand has average sepal width and longer sepal. Lastly, the Virginica has the longest sepal and an average sepal width.
+
+7. Import the alexa-file.xlsx. Check on the variations. Notice that there are extra whitespaces among black variants (Black Dot, Black Plus, Black Show, Black Spot). Also on the white variants (White Dot, White Plus, White Show, White
+Spot).
+```{r}
+library(readxl)
+alexa <- read_xlsx("alexa_file.xlsx")
+alexa
+```
+a. Rename the white and black variants by using gsub() function.
+```{r}
+alexa$variation <- gsub("Black  Dot", "BlackDot", alexa$variation)
+alexa$variation <- gsub("Black  Plus", "BlackPlus", alexa$variation)
+alexa$variation <- gsub("Black  Show", "BlackShow", alexa$variation)
+alexa$variation <- gsub("Black  Spot", "BlackSpot", alexa$variation)
+alexa$variation <- gsub("White  Spot", "WhiteSpot", alexa$variation)
+alexa$variation <- gsub("White  Show", "WhiteShow", alexa$variation)
+alexa$variation <- gsub("White  Plus", "WhitePlus", alexa$variation)
+alexa$variation <- gsub("White  Dot", "WhiteDot", alexa$variation)
+
+alexa$variation[1052:2000]
+```
+
+
+
+
+
+
 
 
 
