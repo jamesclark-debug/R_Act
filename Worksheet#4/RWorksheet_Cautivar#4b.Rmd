@@ -218,6 +218,65 @@ alexa$variation <- gsub("White  Dot", "WhiteDot", alexa$variation)
 
 alexa$variation[1052:2000]
 ```
+b. Get the total number of each variations and save it into another object. Save the object as variations.RData. Write the R scripts. What is its result?
+```{r}
+library(dplyr)
+totalVar <- alexa %>%
+count(alexa$variation)
+totalVar
+
+save(totalVar, file = "variations.RData")
+```
+c. From the variations.RData, create a barplot(). Complete the details of the chart which include the title, color, labels of each bar.
+```{r}
+load("variations.RData")
+
+barplot(
+  totalVar$n,
+  col = c("pink", "blue", "skyblue", "lightgreen"),
+  main = "Total Number Of Each Variations",
+  ylab = "Variants",
+  names.arg = totalVar$`alexa$variation`,         
+  las = 2      
+)
+```
+d. Create a barplot() for the black and white variations. Plot it in 1 frame, side by side. Complete the details of the chart.
+```{r}
+library(dplyr)
+
+load("variations.RData")
+
+par(mfrow = c(1, 2))
+
+blackV <- totalVar %>% 
+  filter(`alexa$variation` %in% c("Black", "BlackDot", "BlackPlus", "BlackShow", "BlackSpot"))
+
+barplot(
+  height = blackV$n, 
+  names.arg = blackV$`alexa$variation`, 
+  col = c("pink", "blue", "skyblue", "lightgreen", "cyan"),               
+  main = "Black Variants",
+  xlab = "Total Numbers",                         
+  ylab = "Variations",
+  las = 2
+)
+
+WhiteV <- totalVar %>% 
+  filter(`alexa$variation` %in% c("White", "WhiteDot", "WhitePlus", "WhiteShow", "WhiteSpot"))
+
+barplot(
+  height = WhiteV$n,  
+  names.arg = WhiteV$`alexa$variation`, 
+  col = c("pink", "blue", "skyblue", "lightgreen", "cyan"),               
+  main = "White Variants",
+  xlab = "Total Numbers",                         
+  ylab = "Variations",
+  las = 2
+)
+```
+
+
+
 
 
 
