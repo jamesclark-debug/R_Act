@@ -1,0 +1,152 @@
+---
+title: "RWorksheet_Cautivar#4c.Rmd"
+author: "James Clark Cautivar"
+date: "2024-11-1"
+output: pdf_document
+---
+1. Use the dataset mpg
+a. Show your solutions on how to import a csv file into the environment.
+```{r}
+library(ggplot2)
+
+write.csv(mpg, "mpg.csv", row.names = FALSE)
+mpg_data <- read.csv("mpg.csv")
+str(mpg_data)
+```
+b. Which variables from mpg dataset are categorical?
+The variables that are categorical in the mpg dataset are manufacturer, model, year, cyl, trans, drv, fl, and class.
+
+c. Which are continuous variables?
+The continuous variables are displ, cty, and hwy.
+
+2. Which manufacturer has the most models in this data set? Which model has the most variations? Show your answer.
+a. Group the manufacturers and find the unique models. Show your codes and result.
+```{r}
+library(dplyr)
+
+manufacturerModelCount <- mpg %>%
+  group_by(manufacturer) %>%
+  summarize(num_models = n_distinct(model)) %>%
+  arrange(desc(num_models))
+
+manufacturerModelCount
+
+
+modelVariationCount <- table(mpg$model)
+modelVariationCount [modelVariationCount  == max(modelVariationCount )]
+
+```
+The manufacturer that has the most models in this data set is toyota which has 6 models.
+
+The model that has the most variations is the  caravan 2wd which has 11C variarions.
+
+b. Graph the result by using plot() and ggplot(). Write the codes and its result.
+```{r}
+library(dplyr)
+library(ggplot2)
+
+manufacturer_counts <- setNames(manufacturerModelCount$num_models, manufacturerModelCount$manufacturer)
+
+barplot(manufacturer_counts, 
+        main = "Number of Models per Manufacturer",
+        xlab = "Manufacturer",
+        ylab = "Number of Models",
+        col = c("lightblue", "lightcoral", "palegreen", "khaki", "plum"),
+        las = 2)
+
+modelVariationCount <- mpg %>%
+  group_by(model) %>%
+  summarize(count = n()) %>%
+  arrange(desc(count))
+
+print(modelVariationCount)
+
+ggplot(modelVariationCount, aes(x = reorder(model, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "lightcoral") +
+  labs(title = "Number of Variations per Model", x = "Model", y = "Count") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+2. Same dataset will be used. You are going to show the relationship of the modeland the manufacturer.
+a. What does ggplot(mpg, aes(model, manufacturer)) + geom_point() show?
+```{r}
+ggplot(mpg, aes(model, manufacturer)) + geom_point()
+```
+It shows a scatter plot of the mpg models and manufacturers.
+
+b. For you, is it useful? If not, how could you modify the data to make it more informative?
+For me, it's not that useful due to the visualization of it. It's not clear and the labels are covering each other which is confusing. To make it more informative, i'll change it into a bar graph and fix the labels to make it organized.
+
+3. Plot the model and the year using ggplot(). Use only the top 20 observations. Write the codes and its results.
+```{r}
+library(ggplot2)
+
+top20Obs <- mpg[1:20, ]
+
+ggplot(top20Obs, aes(x = model, y = year)) +
+  geom_point(color = "palegreen", size = 3) +
+  labs(title = "Model and Year (Top 20 Observations)",
+       x = "Model",
+       y = "Year") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+4. Using the pipe (%>%), group the model and get the number of cars per model. Show codes and its result
+```{r}
+library(dplyr)
+
+carCounts <- mpg %>%
+  group_by(model) %>%
+  summarise(count = n())
+
+carCounts
+```
+a. Plot using geom_bar() using the top 20 observations only. The graphs shoudl have a title, labels and colors. Show code and results.
+```{r}
+library(ggplot2)
+library(dplyr)
+
+top20Obs <- mpg[1:20, ]
+
+carCounts20 <- top20Obs %>%
+  group_by(model) %>%
+  summarise(count = n())
+
+ggplot(carCounts20, aes(x = reorder(model, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "khaki") +
+  labs(title = "Number of Cars per Model (Top 20 Observations)",
+       x = "Model",
+       y = "Count") +
+  theme(axis.text.x = element_text(hjust = 1))
+
+```
+b. Plot using the geom_bar() + coord_flip() just like what is shown below. Show codes and its result.
+```{r}
+library(ggplot2)
+library(dplyr)
+
+top20Obs <- mpg[1:20, ]
+
+carCounts20 <- top20Obs %>%
+  group_by(model) %>%
+  summarise(count = n())
+
+ggplot(carCounts20, aes(x = reorder(model, count), y = count)) +
+  geom_bar(stat = "identity", fill = "plum") +
+  coord_flip() +
+  labs(title = "Number of Cars per Model (Top 20 Observations)",
+       x = "Count",
+       y = "Model") +
+  theme_minimal()
+```
+
+
+
+
+
+
+
+
+
+
+
