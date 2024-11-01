@@ -217,6 +217,8 @@ alexa$variation <- gsub("White  Plus", "WhitePlus", alexa$variation)
 alexa$variation <- gsub("White  Dot", "WhiteDot", alexa$variation)
 
 alexa$variation[1052:2000]
+
+knitr::include_graphics("Screenshot.png")
 ```
 b. Get the total number of each variations and save it into another object. Save the object as variations.RData. Write the R scripts. What is its result?
 ```{r}
