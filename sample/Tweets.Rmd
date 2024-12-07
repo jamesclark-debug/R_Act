@@ -19,6 +19,8 @@ tweetsDF$text <- gsub("<a href=([^>]*?) rel=nofollow>([^<]*?)<a>", "", tweetsDF$
 
 tweetsDF$text <- gsub("\\s+", " ", tweetsDF$text)
 
+write.csv(tweetsDF, "cleanedTweets.csv", row.names = FALSE)
+
 
 ```
 
